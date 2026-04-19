@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADP - Sistema de Alerta de Pessoas Desaparecidas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação Principal">
+            <div class="container">
+                <a class="navbar-brand" href="#">SADP - Sistema de Alerta</a>
+                <span class="navbar-text d-none d-md-block">
+                    Sistema Desenvolvido para estudos
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container dashboard-container my-4">
+        
+        <section class="row mb-4 align-items-center">
+            <header class="col">
+                <h1 class="h3">Painel de Monitoramento</h1>
+                <p class="text-muted">Dados em tempo real consumidos via API</p>
+            </header>
+            
+            <aside class="col-auto">
+                <a class="btn btn-danger" href="register.html" role="button">
+                    + Registrar Novo Desaparecimento
+                </a>
+            </aside>
+        </section>
+
+        <article class="card shadow-sm">
+            <header class="card-header card-header-custom d-flex justify-content-between align-items-center bg-light">
+                <h2 class="h6 mb-0 text-dark">Lista de Registros Ativos</h2>
+                <button class="btn btn-sm btn-outline-dark" onclick="loadDashboardData()" aria-label="Atualizar lista de dados">
+                    Atualizar Dados
+                </button>
+            </header>
+            
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered mb-0" id="tableMissingPerson">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Nome Completo</th>
+                                <th scope="col">Última Vez Visto</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyMissingPerson">
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">
+                                    <div class="spinner-border spinner-border-sm text-danger" role="status">
+                                        <span class="visually-hidden">Carregando...</span>
+                                    </div>
+                                    Carregando registros...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="mt-auto py-3 text-center text-muted border-top">
+        <div class="container">
+            <small>SADP &copy; 2025 - Desenvolvido por <strong>Augusto Silveira</strong></small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+</body>
+</html>

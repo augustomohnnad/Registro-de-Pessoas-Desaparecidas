@@ -1,0 +1,40 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+}
+.navbar-brand {
+    font-weight: 700;
+    color: #dc3545 !important; 
+}
+.dashboard-container {
+    margin-top: 30px;
+}
+.card-header-custom {
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fdd1d1;
+    cursor: pointer;
+}
+.status-badge {
+    font-size: 0.8em;
+}
+
+
+
+/*Formulario*/
+body {
+    background-color: #f4f7f6; 
+}
+.form-container {
+    max-width: 700px;
+    margin: 50px auto;
+}
+.card-header {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+}

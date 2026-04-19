@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SADP - Cadastrar Desaparecido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="bg-light">
+
+    <header class="py-3">
+        <div class="container">
+            <nav aria-label="Navegação de retorno">
+                <a href="index.html" class="btn btn-secondary btn-sm">← Voltar ao Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container form-container pb-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-danger text-white text-center py-3">
+                <h1 class="h5 mb-0 text-uppercase fw-bold">Registrar Nova Pessoa Desaparecida</h1>
+            </div>
+
+            <div class="card-body p-4">
+                <form id="formCadastro">
+                    <div class="row">
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="full_name" class="form-label fw-bold">Nome Completo</label>
+                            <input type="text" class="form-control" id="full_name" required placeholder="Digite o nome completo">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="cpf" class="form-label fw-bold">CPF</label>
+                            <input type="text" class="form-control" id="cpf" required placeholder="000.000.000-00">
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="age" class="form-label fw-bold">Idade Aproximada</label>
+                            <input type="number" class="form-control" id="age" min="0" max="120" required placeholder="Ex: 25">
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="gender" class="form-label fw-bold">Gênero</label>
+                            <select class="form-select" id="gender" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="nao_binario">Não-binário</option>
+                                <option value="outro">Outro / Prefere não dizer</option>
+                            </select>
+                        </div>
+
+                         <div class="col-md-3 mb-3">
+                            <label for="status" class="form-label fw-bold">Status</label>
+                            <select class="form-select" id="status" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="desaparecido">Desaparecido</option>
+                                <option value="encontrado">Encontrado</option>
+                                <option value="obito">Obito</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="date_missing" class="form-label fw-bold">Desaparecimento</label>
+                            <input type="date" class="form-control" id="date_missing" required>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="last_seen_location" class="form-label fw-bold">Último Local Visto</label>
+                            <input type="text" class="form-control" id="last_seen_location" required placeholder="Ex: Rua, Bairro, Cidade, Ponto de referência">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="photo_file" class="form-label fw-bold">Foto do Desaparecido</label>
+                            <input type="file" class="form-control" id="photo_file" accept="image/*">
+                            <div class="form-text">Formatos aceitos: JPG, PNG. Tamanho máx: 2MB.</div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="description" class="form-label fw-bold">Características Físicas / Observações</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Ex: Tatuagens, cicatrizes, cor da roupa no dia, cor dos olhos..."></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="reset" class="btn btn-outline-secondary px-5">Limpar</button>
+                        <button type="submit" class="btn btn-danger btn-lg px-5">Salvar Registro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted">
+        <small>SADP &copy; 2026 - Módulo de Cadastro de Casos</small>
+    </footer>
+
+    <script src="./scripts/registerScript.js"></script>
+</body>
+</html>

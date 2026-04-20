@@ -3,17 +3,15 @@ const form = document.getElementById('formCadastro');
 form.addEventListener('submit', async (e) => {
     e.preventDefault(); 
 
-    // Capturando os dados conforme os novos campos do HTML
-    // Dica: Use o ID exato que definimos no HTML
     const formData = {
         name: document.getElementById('full_name').value,
         cpf: document.getElementById('cpf').value,
-        age: parseInt(document.getElementById('age').value), // Conversão de tipo (Type Casting)
+        age: parseInt(document.getElementById('age').value), 
         gender: document.getElementById('gender').value,
         status: document.getElementById('status').value,
         date_disappearance: document.getElementById('date_missing').value,
         last_location: document.getElementById('last_seen_location').value,
-        photo_url: "https://via.placeholder.com/150", // Simulação, já que input file exige tratamento diferente
+        photo_url: "https://via.placeholder.com/150", 
         physical_characteristic: document.getElementById('description').value
     };
 
@@ -30,7 +28,7 @@ form.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             alert('Registro salvo com sucesso!');
-            window.location.href = 'index.html'; // Redirecionamento após o sucesso
+            window.location.href = 'index.html'; 
         } else {
             const errorData = await response.json();
             alert('Erro ao salvar: ' + (errorData.message || 'Erro desconhecido'));

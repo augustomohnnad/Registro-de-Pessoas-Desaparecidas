@@ -1,6 +1,6 @@
 class StorageService {
     constructor(supabaseClient) {
-        this.supabase = supabaseClient; // Injeção do cliente configurado acima
+        this.supabase = supabaseClient;
     }
 
     /**

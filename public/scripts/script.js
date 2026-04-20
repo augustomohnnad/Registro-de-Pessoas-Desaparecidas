@@ -39,7 +39,6 @@ async function loadDashboardData() {
                 </tr>
             `;
             
-            // Injeta a linha criada no final da tabela
             tbody.insertAdjacentHTML('beforeend', row);
         });
 

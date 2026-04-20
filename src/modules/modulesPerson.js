@@ -3,8 +3,8 @@ const PersonModel = require("../database/model/modelPerson");
 const ControllerPerson = require("../controller/controllerPerson");
 const routerPerson = require("../router/routerPerson");
 
-// Importamos a configuração do Supabase e o seu novo Service
-const supabase = require("../infra/configSupeBase"); // Onde está o createClient
+
+const supabase = require("../infra/configSupeBase");
 const SupabaseStorageService = require("../services/storegeService"); 
 
 const personRefactoring = async (app) => {

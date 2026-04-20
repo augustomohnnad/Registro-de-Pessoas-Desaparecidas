@@ -26,7 +26,7 @@ class StorageService {
                 .from('VaiNaWeb')
                 .getPublicUrl(filePath);
 
-            return resizeBy.statur(200).json(publicUrl)
+            return publicUrl
 
         } catch (error) {
             console.error("[STORAGE SERVICE ERROR]:", error.message);

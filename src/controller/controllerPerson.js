@@ -8,19 +8,17 @@ class ControllerPerson {
         try {
             const {name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic} = req.body
 
-            const file = req.file;
+            const file = req.file
 
             if(!req.body.cpf || req.body.cpf.length !== 11) {
                 throw new Error(`${name} com CPF vazio ou menor que 11 digitos.`)
             }
 
-            let photoUrl = null
-            if (file) {
-                
-                photoUrl = await this.storageService.uploadImage(file);
-            }
-            console.log("DEBUG: A URL que vou salvar é:", photoUrl)
-            await this.person.insertPerson(name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic)
+            let photo_url = null
+            photo_url = await this.storageService.uploadImage(file);
+
+            await this.storageService.uploadImage(file);
+            await this.person.insertPerson(name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url)
 
             return res.status(201).send(`${name}, Registered successfully!`)
 

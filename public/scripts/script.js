@@ -19,13 +19,13 @@ async function loadDashboardData() {
         people.forEach(person => {
             const dataDesaparecimento = new Date(person.date_disappearance).toLocaleDateString('pt-BR');
             
-            const photoUrl = person.photourl;
+            const photoUrl = person.photo_url;
 
             const row = `
                 <tr>
                     <td>${person.id}</td>
                     <td class="text-center">
-                        <img src="${photoUrl}" alt="Foto de ${person.photourl}" class="rounded-circle" width="40" height="40" style="object-fit: cover;">
+                        <img src="${photoUrl}" alt="Foto de ${person.photo_url}" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
                     </td>
                     <td class="fw-bold text-primary">${person.name.toUpperCase()}</td>
                     <td>${person.last_location}</td>

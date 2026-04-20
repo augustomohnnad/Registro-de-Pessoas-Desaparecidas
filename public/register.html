@@ -9,96 +9,103 @@
 </head>
 <body class="bg-light">
 
-    <header class="py-3">
-        <div class="container">
-            <nav aria-label="Navegação de retorno">
-                <a href="index.html" class="btn btn-secondary btn-sm">← Voltar ao Dashboard</a>
+    <header class="py-3 bg-white border-bottom shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-danger">SADP System</span>
+            <nav aria-label="Navegação principal">
+                <a href="index.html" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> ← Voltar ao Dashboard
+                </a>
             </nav>
         </div>
     </header>
 
-    <main class="container form-container pb-5">
-        <div class="card shadow border-0">
-            <div class="card-header bg-danger text-white text-center py-3">
+    <main class="container my-5">
+        <article class="card shadow border-0 mx-auto" style="max-width: 900px;">
+            <header class="card-header bg-danger text-white text-center py-3">
                 <h1 class="h5 mb-0 text-uppercase fw-bold">Registrar Nova Pessoa Desaparecida</h1>
-            </div>
+            </header>
 
             <div class="card-body p-4">
-                <form id="formCadastro">
-                    <div class="row">
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="full_name" class="form-label fw-bold">Nome Completo</label>
-                            <input type="text" class="form-control" id="full_name" required placeholder="Digite o nome completo">
+                <form id="formCadastro" enctype="multipart/form-data" method="POST">
+                    
+                    <fieldset class="mb-4">
+                        <legend class="h6 fw-bold text-secondary text-uppercase border-bottom pb-2">Informações Pessoais</legend>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="full_name" class="form-label fw-bold">Nome Completo</label>
+                                <input type="text" class="form-control" id="name" name="name" required placeholder="Digite o nome completo" aria-required="true">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cpf" class="form-label fw-bold">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" required placeholder="000.000.000-00" >
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="age" class="form-label fw-bold">Idade Aproximada</label>
+                                <input type="number" class="form-control" id="age" name="age" min="0" max="120" required placeholder="Ex: 25">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label fw-bold">Gênero</label>
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="" selected disabled>Selecione...</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="nao_binario">Não-binário</option>
+                                    <option value="outro">Outro / Prefere não dizer</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="status" class="form-label fw-bold">Status Atual</label>
+                                <select class="form-select" id="status" name="status" required>
+                                    <option value="desaparecido" selected>Desaparecido</option>
+                                    <option value="encontrado">Encontrado</option>
+                                    <option value="obito">Óbito</option>
+                                </select>
+                            </div>
                         </div>
+                    </fieldset>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="cpf" class="form-label fw-bold">CPF</label>
-                            <input type="text" class="form-control" id="cpf" required placeholder="000.000.000-00">
+                    <fieldset class="mb-4">
+                        <legend class="h6 fw-bold text-secondary text-uppercase border-bottom pb-2">Detalhes do Desaparecimento</legend>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="date_disappearance" class="form-label fw-bold">Data do Evento</label>
+                                <input type="date" class="form-control" id="date_disappearance" name="date_disappearance" required>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="last_location" class="form-label fw-bold">Último Local Visto</label>
+                                <input type="text" class="form-control" id="last_location" name="last_location" required placeholder="Rua, Bairro, Cidade, Ponto de referência">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="photo_url" class="form-label fw-bold">Foto do Desaparecido</label>
+                                <input type="file" class="form-control" id="photo_url" name="photo_url" accept="image/jpeg, image/png">
+                                <p id="fileHelp" class="form-text">Formatos aceitos: JPG, PNG. Tamanho máx: 2MB.</p>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="physical_characteristic" class="form-label fw-bold">Características / Observações</label>
+                                <textarea class="form-control" id="physical_characteristic" name="physical_characteristic" rows="3" placeholder="Tatuagens, cicatrizes, cor da roupa..."></textarea>
+                            </div>
                         </div>
+                    </fieldset>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="age" class="form-label fw-bold">Idade Aproximada</label>
-                            <input type="number" class="form-control" id="age" min="0" max="120" required placeholder="Ex: 25">
-                        </div>
-
-                        <div class="col-md-3 mb-3">
-                            <label for="gender" class="form-label fw-bold">Gênero</label>
-                            <select class="form-select" id="gender" required>
-                                <option value="" selected disabled>Selecione...</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="feminino">Feminino</option>
-                                <option value="nao_binario">Não-binário</option>
-                                <option value="outro">Outro / Prefere não dizer</option>
-                            </select>
-                        </div>
-
-                         <div class="col-md-3 mb-3">
-                            <label for="status" class="form-label fw-bold">Status</label>
-                            <select class="form-select" id="status" required>
-                                <option value="" selected disabled>Selecione...</option>
-                                <option value="desaparecido">Desaparecido</option>
-                                <option value="encontrado">Encontrado</option>
-                                <option value="obito">Obito</option>
-                            </select>
-                        </div>
-
-
-                        <div class="col-md-3 mb-3">
-                            <label for="date_missing" class="form-label fw-bold">Desaparecimento</label>
-                            <input type="date" class="form-control" id="date_missing" required>
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <label for="last_seen_location" class="form-label fw-bold">Último Local Visto</label>
-                            <input type="text" class="form-control" id="last_seen_location" required placeholder="Ex: Rua, Bairro, Cidade, Ponto de referência">
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <label for="photo_file" class="form-label fw-bold">Foto do Desaparecido</label>
-                            <input type="file" class="form-control" id="photo_file" accept="image/*">
-                            <div class="form-text">Formatos aceitos: JPG, PNG. Tamanho máx: 2MB.</div>
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <label for="description" class="form-label fw-bold">Características Físicas / Observações</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Ex: Tatuagens, cicatrizes, cor da roupa no dia, cor dos olhos..."></textarea>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="reset" class="btn btn-outline-secondary px-5">Limpar</button>
-                        <button type="submit" class="btn btn-danger btn-lg px-5">Salvar Registro</button>
-                    </div>
+                    <footer class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-4">
+                        <button type="reset" class="btn btn-outline-secondary px-5">Limpar Formulário</button>
+                        <button type="submit" class="btn btn-danger btn-lg px-5">Finalizar Registro</button>
+                    </footer>
                 </form>
             </div>
-        </div>
+        </article>
     </main>
 
-    <footer class="text-center py-4 text-muted">
-        <small>SADP &copy; 2026 - Módulo de Cadastro de Casos</small>
+    <footer class="text-center py-4 bg-white border-top">
+        <p class="mb-0 text-muted small">SADP &copy; 2026 - Módulo de Gestão de Casos e Segurança Pública</p>
     </footer>
 
     <script src="./scripts/registerScript.js"></script>

@@ -3,21 +3,27 @@ class StorageService {
         this.supabase = supabaseClient;
     }
 
-    uploadImage = async(file) => {
+    /**
+     * @param {Object} file - Objeto de arquivo vindo do Multer (req.file)
+     * @returns {Promise<string>} - Retorna a URL pública da imagem
+     */
+     uploadImage = async(file) => {
         try {
-            //Acrecentamos o nome do arquivo o TimeStam (época Unix) ex: 123456-photName.jpg
-            const fileName = `${Date.now()}-${file.originalname}`; 
+            
+        
+            // Geramos um nome único usando timestamp para evitar que fotos com o mesmo nome se sobrescrevam
+            const fileName = `${Date.now()}-${file.originalname}`;
             const filePath = `${fileName}`;
 
-            // 1. Fazemos o upload para o Bucket (que criei no  Supabase)
+            // 1. Fazemos o upload para o Bucket (que criamos no painel do Supabase)
             const { data, error } = await this.supabase.storage
                 .from('VaiNaWeb')
                 .upload(filePath, file.buffer, {
                     contentType: file.mimetype,
-                    upsert: false
+                    upsert: false // Não sobrescreve arquivos existentes
                 });
 
-            if (!error) {
+            if (error) {
                 throw new Error(`Falha no upload para o Storage: ${error.message}`);
             }
 
@@ -26,13 +32,13 @@ class StorageService {
                 .from('VaiNaWeb')
                 .getPublicUrl(filePath);
 
-            return publicUrl
+            return publicUrl;
 
         } catch (error) {
             console.error("[STORAGE SERVICE ERROR]:", error.message);
-            throw error;
+            throw error; // Repassamos o erro para o Controller tratar
         }
     }
 }
 
-module.exports = StorageService; 
+module.exports = StorageService;

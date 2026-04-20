@@ -26,6 +26,5 @@ form.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error('Erro na requisição:', error);
-        alert('Falha crítica ao conectar com o servidor.');
     }
 });

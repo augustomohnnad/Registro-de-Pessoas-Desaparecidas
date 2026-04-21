@@ -5,7 +5,7 @@ class StorageService {
 
     /**
      * @param {Object} file - Objeto de arquivo vindo do Multer (req.file)
-     * @returns {Promise<string>} - Retorna a URL pública da imagem
+     * @returns {Promise<{publicUrl: string, filePath: string}>} - Retorna a URL e o caminho
      */
      uploadImage = async(file) => {
         try {
@@ -32,12 +32,28 @@ class StorageService {
                 .from('VaiNaWeb')
                 .getPublicUrl(filePath);
 
-            return publicUrl;
+            return { publicUrl, filePath };;
 
         } catch (error) {
             console.error("[STORAGE SERVICE ERROR]:", error.message);
             throw error; // Repassamos o erro para o Controller tratar
         }
+    }
+
+    /**
+     * @param {string} filePath - O caminho do arquivo dentro do bucket
+     */
+
+    removeImage = async (filePath) => {
+        try {
+            const {error} = await this.supabase.storage
+            .from('VaiNaWeb')
+            .remove([filePath])
+
+        } catch {
+            console.error(`[STORAGE ERROR]: Não foi possível remover o arquivo ${filePath}:, error.message`)
+        }
+        
     }
 }
 

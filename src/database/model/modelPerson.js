@@ -15,14 +15,14 @@ class PersonModel {
                 date_disappearance TEXT,
                 physical_characteristic TEXT,
                 photo_url TEXT,
-                status TEXT DEFAULT "Desaparecido"
+                status TEXT DEFAULT "DESAPARECIDO"
             ) 
         `)
 
         await this.modelPerson.exec(sql)
     }
 
-    insertPerson = async (name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url) => {
+    insertPerson = async (name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url, status) => {
         const sql = (`
             INSERT INTO tb_disappearance(
                 name,
@@ -32,10 +32,11 @@ class PersonModel {
                 last_location,
                 date_disappearance,
                 physical_characteristic,
-                photo_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                photo_url,
+                status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `)
 
-        return await this.modelPerson.run(sql, [name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url])
+        return await this.modelPerson.run(sql, [name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url, status])
 
     }
 

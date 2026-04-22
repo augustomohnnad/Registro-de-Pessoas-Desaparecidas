@@ -23,7 +23,7 @@ class ControllerPerson {
 
             await this.person.insertPerson(name, cpf,  age, gender, last_location, date_disappearance, physical_characteristic, photo_url, status)
 
-            return res.status(201).send(`${name}, Registered successfully!`)
+            return res.status(201).json(`${name}, Registered successfully!`)
 
         } catch (e) {
             if(e.message.includes("UNIQUE")) {

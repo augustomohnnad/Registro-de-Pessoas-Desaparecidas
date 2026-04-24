@@ -15,7 +15,7 @@ async function loadDashboardData() {
     `;
 
     try {
-        const response = await fetch("https://registro-de-pessoas-desaparecidas.onrender.com");
+        const response = await fetch("https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson");
 
         if (!response.ok) {
             throw new Error('Falha na comunicação com a API');

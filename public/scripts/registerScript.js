@@ -16,7 +16,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('https://api.render.com/deploy/srv-d7lt9hhf9bms73ba1t80?key=RkJ9KNj0Loc', {
+        const response = await fetch('https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson', {
             method: 'POST',
             body: formData
         });

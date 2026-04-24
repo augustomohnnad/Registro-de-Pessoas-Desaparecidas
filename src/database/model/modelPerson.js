@@ -48,6 +48,38 @@ class PersonModel {
         return await this.modelPerson.all(sql)
     }
 
+    getSinglePerson = async (id) => {
+        const sql = (`
+            SELECT FROM tb_disappearance
+            WHERE id = ?
+        `)
+
+        return await this.modelPerson.get(sql, [id])
+    }
+
+    updatePerson = async (name, last_location, photo_url, status, id) => {
+        const sql = (`
+            UPDATE tb_disappearance
+            SET name = ?,
+                last_location = ?,
+                photo_url = ?,
+                status = ?
+            WHERE id = ?
+        `)
+
+        return await this.modelPerson.run(sql, [name, last_location, photo_url, status, id])
+
+    }
+
+    deletePerson = async (id) => {
+        const sql = (`
+            DELETE FROM tb_disappearance
+            WHERE id = ?
+        `)
+
+        return await this.modelPerson(sql, [id])
+    }
+
 }
 
 module.exports = PersonModel

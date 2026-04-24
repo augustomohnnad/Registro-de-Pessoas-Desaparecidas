@@ -54,12 +54,94 @@ class ControllerPerson {
             return res.status(200).json(listAll)
 
         } catch (e) {
-             console.error(`[SERVER ERROR]: ${e.message}`)
+            console.error(`[SERVER ERROR]: ${e.message}`)
             return res.status(500).json({
                 erro: true, 
                 mensagem: e.message
             })
         }
+    }
+
+    getPerson = async (req, res) => {
+        try {
+            const {id} = req.body
+            const getId = await this.ControllerPerson.getSinglePerson(Number(id))
+
+            if(!getId) {
+                throw new Error("Person Not foud");
+            }
+
+            return res.status(200).json(getId)
+
+        } catch (e) {
+            console.erro(`[SEARCH ERROR], ${e.message}`)
+            return res.status(404).json({
+                error: true,
+                mensagem: e.message
+            })
+
+            console.error(`[SERVER ERROR]: ${e.message}`)
+            return res.status(500).json({
+                erro: true, 
+                mensagem: e.message
+            })
+        }
+    }
+
+    editPerson = async (req, res) => {
+        try {
+            const {name, last_location, status, id} = req.body
+            const checkFile = req.file
+            const checkId = await this.ControllerPerson.getSinglePerson(Number(id))
+
+            if(!checkId) {
+                throw new Error("Person Not foud");
+            }
+
+            await this.ControllerPerson.updatePerson(name, last_location, status, id)
+            return res.status(200).json(`${name} updated of sucessefull!`)
+
+        } catch(e) {
+            console.erro(`[SEARCH ERROR], ${e.message}`)
+            return res.status(404).json({
+                error: true,
+                mensagem: e.message
+            })
+
+            console.error(`[SERVER ERROR]: ${e.message}`)
+            return res.status(500).json({
+                erro: true, 
+                mensagem: e.message
+            })
+        } 
+    }
+
+    deletPerson = async (req, res) => {
+        try {
+            const {id} = req.body
+            const checkPerson = await this.ControllerPerson.getSinglePerson(Number(id))
+
+             if(!checkPerson) {
+                throw new Error("Person Not foud");
+            }
+
+            await this.ControllerPerson.deletePerson(name, last_location, status, id)
+            return res.status(200).json(`${name} delete of sucessefull!`)
+
+        } catch(e) {
+            console.erro(`[SEARCH ERROR], ${e.message}`)
+            return res.status(404).json({
+                error: true,
+                mensagem: e.message
+            })
+
+            console.error(`[SERVER ERROR]: ${e.message}`)
+            return res.status(500).json({
+                erro: true, 
+                mensagem: e.message
+            })
+        } 
+        
     }
 }
 

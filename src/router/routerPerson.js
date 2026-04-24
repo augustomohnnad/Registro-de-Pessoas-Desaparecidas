@@ -10,6 +10,9 @@ module.exports = (controller) => {
 
     router.post("/", upload.single('photo_url'), (req, res) => (controller.registerMissing(req, res)))
     router.get("/", (req, res) => (controller.everyonePerson(req, res)))
+    router.get("/:id", (req,res) => (controller.getPerson(req, res)))
+    router.put("/:id", (req,res) => (controller.editPerson(req, res)))
+    router.delete("/:id", (req,res) => (controller.deletPerson(req, res)))
     
     return router
 }

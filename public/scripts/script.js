@@ -15,7 +15,7 @@ async function loadDashboardData() {
     `;
 
     try {
-        const response = await fetch("http://127.0.0.1:3000/api/missingPerson");
+        const response = await fetch("https://api.render.com/deploy/srv-d7lt9hhf9bms73ba1t80?key=RkJ9KNj0Loc");
 
         if (!response.ok) {
             throw new Error('Falha na comunicação com a API');

@@ -11,11 +11,11 @@ class StorageService {
         try {
             
         
-            // Geramos um nome único usando timestamp para evitar que fotos com o mesmo nome se sobrescrevam
+            // nome único usado timestamp para evitar que fotos com o mesmo nome se sobrescrevam
             const fileName = `${Date.now()}-${file.originalname}`;
             const filePath = `${fileName}`;
 
-            // 1. Fazemos o upload para o Bucket (que criamos no painel do Supabase)
+            //Faz o upload para o Bucket 
             const { data, error } = await this.supabase.storage
                 .from('VaiNaWeb')
                 .upload(filePath, file.buffer, {
@@ -27,7 +27,7 @@ class StorageService {
                 throw new Error(`Falha no upload para o Storage: ${error.message}`);
             }
 
-            // 2. Solicitamos a URL pública do arquivo que acabamos de subir
+            //Solicitaa URL pública do arquivo que esta na Nuvem
             const { data: { publicUrl } } = this.supabase.storage
                 .from('VaiNaWeb')
                 .getPublicUrl(filePath);
@@ -36,7 +36,7 @@ class StorageService {
 
         } catch (error) {
             console.error("[STORAGE SERVICE ERROR]:", error.message);
-            throw error; // Repassamos o erro para o Controller tratar
+            throw error; // Repassa o erro para o Controller tratar
         }
     }
 

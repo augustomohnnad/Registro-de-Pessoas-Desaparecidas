@@ -1,5 +1,5 @@
 const API_CONFIG = {
-    URL: "https://registro-de-pessoas-desaparecidas.onrender.com",
+    URL: "https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson",
     REDIRECT_PAGE: "index.html"
 };
 

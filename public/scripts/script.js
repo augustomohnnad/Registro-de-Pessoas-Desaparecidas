@@ -2,7 +2,7 @@
  * CONFIGURAÇÃO DE AMBIENTE
  */
 const API_CONFIG = {
-    URL: "https://registro-de-pessoas-desaparecidas.onrender.com",
+    URL: "https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson",
     HEADERS: { 'Content-Type': 'application/json' }
 };
 

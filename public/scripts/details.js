@@ -1,4 +1,4 @@
-const URL_API = "https://registro-de-pessoas-desaparecidas.onrender.com/";
+const URL_API = "https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson";
 
 document.addEventListener('DOMContentLoaded', () => {
     //Captura o ID da URL (ex: ?id=10)

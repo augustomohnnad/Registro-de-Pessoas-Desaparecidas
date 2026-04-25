@@ -54,18 +54,45 @@ Clone o repositório:
 **git clone** [https://github.com/augustomohnnad/Registro-de-Pessoas-Desaparecidas.git]()
 Instale as dependências:
 
-Bash
+```Bash
 npm install
+```
 Configure as variáveis de ambiente:
 Crie um arquivo .env com suas credenciais do Supabase.
 
 Inicie o servidor em modo de desenvolvimento:
 
-Bash
+```Bash
 npm run dev  # Comando configurado para o nodemon
-🎓 Conceitos Aplicados para o Mercado
+```
+
+## 🎓 Conceitos Aplicados para o Mercado
 CRUD Completo: Implementação de criação, leitura, atualização e deleção de registros.
 
 Middleware de Upload: Domínio do fluxo de arquivos entre cliente, servidor e nuvem.
 
 Persistência Híbrida: Uso de banco local para agilidade e nuvem para arquivos pesados, uma prática comum em arquiteturas modernas.
+
+## ☁️ Entendendo o Cloud Storage (Supabase)
+No desenvolvimento de um MVP, um dos maiores desafios é gerenciar arquivos binários (como as fotos das pessoas desaparecidas). Salvar essas imagens diretamente no servidor ou no banco de dados SQLite não é uma prática escalável (o banco ficaria "pesado" e lento).
+
+A solução adotada foi o uso de Cloud Storage (via Supabase), que funciona através do seguinte fluxo:
+
+Interceptação (Multer): Quando o usuário faz o upload no formulário, o middleware Multer recebe o arquivo no backend.
+
+Transferência (Stream): Em vez de salvar na pasta local do projeto, o servidor envia esse arquivo para um Bucket (um container de arquivos na nuvem) no Supabase.
+
+Persistência de Referência: O Cloud Storage armazena o arquivo físico e retorna uma URL Pública.
+
+Vinculação no Banco: No nosso banco SQLite, não salvamos a imagem, mas sim a String (URL) gerada. Assim, o banco permanece leve e a imagem é servida via CDN global.
+
+## 🛠️ Dificuldade Encontrada e Superação
+A maior dificuldade técnica foi a implementação da lógica de Upload Stream. Diferente de salvar um dado textual simples, o armazenamento em nuvem exige:
+
+Configuração de políticas de segurança (CORS).
+
+Tratamento de erros de conexão com a API externa.
+
+Sincronização entre o envio do arquivo e o salvamento do registro no banco de dados.
+
+Superar esse desafio permitiu que o projeto ganhasse características de uma aplicação de nível produção, garantindo que as fotos dos desaparecidos estejam sempre disponíveis, independentemente do estado do servidor backend.

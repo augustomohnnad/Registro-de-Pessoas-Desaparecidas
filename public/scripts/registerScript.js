@@ -1,104 +1,60 @@
-const form = document.getElementById('formCadastro');
+const API_CONFIG = {
+    URL: "https://registro-de-pessoas-desaparecidas.onrender.com",
+    REDIRECT_PAGE: "index.html"
+};
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('formCadastro');
+    if (form) form.addEventListener('submit', handleFormSubmit);
+});
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
 
     const formData = new FormData(form);
 
-    const data = Object.fromEntries(formData.entries());
-
-  
-    const errors = validateData(data, formData);
-
-    if (errors.length > 0) {
-        showErrors(errors);
-        return; 
+    //Validação básica antes do upload
+    const file = formData.get('photo_url');
+    if (!file || file.size === 0) {
+        alert("Por favor, selecione uma foto.");
+        return;
     }
 
     try {
-        const response = await fetch('https://registro-de-pessoas-desaparecidas.onrender.com/api/missingPerson', {
+        toggleButtonState(form, true);
+
+    
+        const response = await fetch(API_CONFIG.URL, {
             method: 'POST',
             body: formData
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Erro ao salvar');
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || 'Falha ao processar upload no servidor.');
         }
 
         const result = await response.json();
-
-        alert('Registro salvo com sucesso!');
-        console.log("[LOG] Sucesso:", result);
-
-        window.location.href = 'index.html';
+        console.log("[LOG] Registro e Upload concluídos:", result);
+        
+        alert('Registro e Foto salvos com sucesso!');
+        window.location.href = API_CONFIG.REDIRECT_PAGE;
 
     } catch (error) {
-        console.error('Erro na requisição:', error);
-        alert(error.message);
+        console.error('[UPLOAD_ERROR]', error);
+        alert(`Erro no Cadastro: ${error.message}`);
+    } finally {
+        toggleButtonState(form, false);
     }
-});
-
-function showErrors(errors) {
-    alert(errors.join('\n'));
 }
 
-function validateFile(formData) {
-    const errors = [];
-
-    const file = formData.get('photo_url');
-
-    if (!file || file.size === 0) {
-        errors.push('Foto é obrigatória');
-        return errors;
+function toggleButtonState(form, isLoading) {
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) {
+        btn.disabled = isLoading;
+        btn.innerHTML = isLoading ? 
+            `<span class="spinner-border spinner-border-sm"></span> Enviando...` : 
+            'Finalizar Registro';
     }
-
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    const maxSize = 2 * 1024 * 1024; // 2MB
-
-    if (!allowedTypes.includes(file.type)) {
-        errors.push('Formato de imagem inválido');
-    }
-
-    if (file.size > maxSize) {
-        errors.push('Imagem muito grande (máx 2MB)');
-    }
-
-    return errors;
-}
-
-function validateData(data, formData) {
-    const errors = [];
-
-    // Nome
-    if (!data.name || data.name.trim().length < 3) {
-        errors.push('Nome deve ter pelo menos 3 caracteres');
-    }
-
-    // Localização
-    if (!data.last_location || data.last_location.trim() === '') {
-        errors.push('Localização é obrigatória');
-    }
-
-    // Data
-    if (!data.date_disappearance) {
-        errors.push('Data de desaparecimento é obrigatória');
-    } else {
-        const date = new Date(data.date_disappearance);
-        if (date > new Date()) {
-            errors.push('Data não pode ser no futuro');
-        }
-    }
-
-    // Status
-    const validStatus = ['desaparecido', 'encontrado', 'em busca'];
-    if (!validStatus.includes((data.status || '').toLowerCase())) {
-        errors.push('Status inválido');
-    }
-
-    // 👇 validação de arquivo integrada
-    const fileErrors = validateFile(formData);
-    errors.push(...fileErrors);
-
-    return errors;
 }

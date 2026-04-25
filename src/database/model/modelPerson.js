@@ -77,7 +77,7 @@ class PersonModel {
             WHERE id = ?
         `)
 
-        return await this.modelPerson(sql, [id])
+        return await this.modelPerson.exec(sql, [id])
     }
 
 }
